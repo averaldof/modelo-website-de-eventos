@@ -4,44 +4,44 @@
 ================================*/
 
 const eventos = [
-{
-id:1,
-titulo:"Workshop de Programação Web",
-centro:"CCNT",
-data:"10/08/2025",
-local:"Auditório CCNT",
-imagem:"images/evento1.png",
-descricao:"Aprenda fundamentos de HTML, CSS e JavaScript."
-},
+   {
+      id: 1,
+      titulo: "Workshop de Programação Web",
+      centro: "CCNT",
+      data: "10/08/2025",
+      local: "Auditório CCNT",
+      imagem: "images/evento1.png",
+      descricao: "Aprenda fundamentos de HTML, CSS e JavaScript."
+   },
 
-{
-id:2,
-titulo:"Seminário de Saúde Coletiva",
-centro:"CCBS",
-data:"15/08/2025",
-local:"Sala 12 - CCBS",
-imagem:"images/evento2.jpg",
-descricao:"Discussão sobre políticas públicas e saúde."
-},
+   {
+      id: 2,
+      titulo: "Seminário de Saúde Coletiva",
+      centro: "CCBS",
+      data: "15/08/2025",
+      local: "Sala 12 - CCBS",
+      imagem: "images/evento2.jpg",
+      descricao: "Discussão sobre políticas públicas e saúde."
+   },
 
-{
-id:3,
-titulo:"Palestra Educação e Tecnologia",
-centro:"CCSE",
-data:"20/08/2025",
-local:"Auditório CCSE",
-imagem:"images/evento3.png",
-descricao:"Impacto da tecnologia nos métodos de ensino."
-},
-{
-id:4,
-titulo:"Mostra Científica UEPA",
-centro:"CCNT",
-data:"25/08/2025",
-local:"Hall Central",
-imagem:"images/evento4.png",
-descricao:"Apresentação de projetos científicos dos alunos."
-}
+   {
+      id: 3,
+      titulo: "Palestra Educação e Tecnologia",
+      centro: "CCSE",
+      data: "20/08/2025",
+      local: "Auditório CCSE",
+      imagem: "images/evento3.png",
+      descricao: "Impacto da tecnologia nos métodos de ensino."
+   },
+   {
+      id: 4,
+      titulo: "Mostra Científica UEPA",
+      centro: "CCNT",
+      data: "25/08/2025",
+      local: "Hall Central",
+      imagem: "images/evento4.png",
+      descricao: "Apresentação de projetos científicos dos alunos."
+   }
 ]
 
 let filtroAtual = "todos"
@@ -51,26 +51,26 @@ let filtroAtual = "todos"
    GERAR CARDS
 ================================*/
 
-function renderEventos(lista){
+function renderEventos(lista) {
 
-const container = document.getElementById("next-events")
-const semResultados = document.getElementById("sem-resultados")
+   const container = document.getElementById("next-events")
+   const semResultados = document.getElementById("sem-resultados")
 
-container.innerHTML = ""
+   container.innerHTML = ""
 
-if(lista.length === 0){
-semResultados.style.display = "block"
-return
-}
+   if (lista.length === 0) {
+      semResultados.style.display = "block"
+      return
+   }
 
-semResultados.style.display = "none"
+   semResultados.style.display = "none"
 
-lista.forEach(evento=>{
+   lista.forEach(evento => {
 
-const card = document.createElement("div")
-card.className = "evento-card"
+      const card = document.createElement("div")
+      card.className = "evento-card"
 
-card.innerHTML = `
+      card.innerHTML = `
 <img src="${evento.imagem}" class="evento-img">
 
 <div class="evento-info">
@@ -88,9 +88,9 @@ Inscrever-se
 </div>
 `
 
-container.appendChild(card)
+      container.appendChild(card)
 
-})
+   })
 
 }
 
@@ -99,21 +99,21 @@ container.appendChild(card)
    FILTRO POR CENTRO
 ================================*/
 
-function aplicarFiltro(){
+function aplicarFiltro() {
 
-const busca = document.getElementById("search-input").value.toLowerCase()
+   const busca = document.getElementById("search-input").value.toLowerCase()
 
-let lista = eventos
+   let lista = eventos
 
-if(filtroAtual !== "todos"){
-lista = lista.filter(e=>e.centro===filtroAtual)
-}
+   if (filtroAtual !== "todos") {
+      lista = lista.filter(e => e.centro === filtroAtual)
+   }
 
-if(busca){
-lista = lista.filter(e=>e.titulo.toLowerCase().includes(busca))
-}
+   if (busca) {
+      lista = lista.filter(e => e.titulo.toLowerCase().includes(busca))
+   }
 
-renderEventos(lista)
+   renderEventos(lista)
 
 }
 
@@ -122,19 +122,19 @@ renderEventos(lista)
    BOTÕES DE FILTRO
 ================================*/
 
-document.querySelectorAll(".filtro-btn").forEach(btn=>{
+document.querySelectorAll(".filtro-btn").forEach(btn => {
 
-btn.addEventListener("click",()=>{
+   btn.addEventListener("click", () => {
 
-document.querySelectorAll(".filtro-btn").forEach(b=>b.classList.remove("active"))
+      document.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("active"))
 
-btn.classList.add("active")
+      btn.classList.add("active")
 
-filtroAtual = btn.dataset.centro
+      filtroAtual = btn.dataset.centro
 
-aplicarFiltro()
+      aplicarFiltro()
 
-})
+   })
 
 })
 
@@ -143,17 +143,17 @@ aplicarFiltro()
    CARDS DE CENTRO
 ================================*/
 
-document.querySelectorAll(".uepa-div").forEach(card=>{
+document.querySelectorAll(".uepa-div").forEach(card => {
 
-card.addEventListener("click",()=>{
+   card.addEventListener("click", () => {
 
-filtroAtual = card.dataset.centro
+      filtroAtual = card.dataset.centro
 
-document.getElementById("proximos-eventos").scrollIntoView({behavior:"smooth"})
+      document.getElementById("proximos-eventos").scrollIntoView({ behavior: "smooth" })
 
-aplicarFiltro()
+      aplicarFiltro()
 
-})
+   })
 
 })
 
@@ -162,9 +162,9 @@ aplicarFiltro()
    BUSCA
 ================================*/
 
-document.getElementById("search-input").addEventListener("input",()=>{
+document.getElementById("search-input").addEventListener("input", () => {
 
-aplicarFiltro()
+   aplicarFiltro()
 
 })
 
@@ -177,32 +177,32 @@ const overlay = document.getElementById("modal-overlay")
 const modalTitulo = document.getElementById("modal-titulo-evento")
 const modalInfo = document.getElementById("modal-info-evento")
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function (e) {
 
-if(e.target.classList.contains("btn-inscrever")){
+   if (e.target.classList.contains("btn-inscrever")) {
 
-const id = Number(e.target.dataset.id)
+      const id = Number(e.target.dataset.id)
 
-const evento = eventos.find(ev=>ev.id===id)
+      const evento = eventos.find(ev => ev.id === id)
 
-modalTitulo.textContent = evento.titulo
-modalInfo.textContent = `${evento.data} • ${evento.local}`
+      modalTitulo.textContent = evento.titulo
+      modalInfo.textContent = `${evento.data} • ${evento.local}`
 
-overlay.classList.remove("hidden")
+      overlay.classList.remove("hidden")
 
-}
+   }
 
 })
 
 
-document.getElementById("modal-fechar").onclick=()=>{
-overlay.classList.add("hidden")
+document.getElementById("modal-fechar").onclick = () => {
+   overlay.classList.add("hidden")
 }
 
-overlay.addEventListener("click",(e)=>{
-if(e.target===overlay){
-overlay.classList.add("hidden")
-}
+overlay.addEventListener("click", (e) => {
+   if (e.target === overlay) {
+      overlay.classList.add("hidden")
+   }
 })
 
 
@@ -212,59 +212,69 @@ overlay.classList.add("hidden")
 
 const form = document.getElementById("form-inscricao")
 
-form.addEventListener("submit",(e)=>{
+form.addEventListener("submit", async (e) => {
 
-e.preventDefault()
+   e.preventDefault()
 
-const nome = document.getElementById("campo-nome")
-const email = document.getElementById("campo-email")
-const curso = document.getElementById("campo-curso")
-const matricula = document.getElementById("campo-matricula")
+   const nome = document.getElementById("campo-nome")
+   const email = document.getElementById("campo-email")
+   const curso = document.getElementById("campo-curso")
+   const matricula = document.getElementById("campo-matricula")
 
-let valido = true
+   let valido = true
 
-function erro(campo,msg,id){
+   function erro(campo, msg, id) {
 
-const el = document.getElementById(id)
+      const el = document.getElementById(id)
 
-if(!campo.value.trim()){
-el.textContent = msg
-valido=false
-}else{
-el.textContent=""
-}
+      if (!campo.value.trim()) {
+         el.textContent = msg
+         valido = false
+      } else {
+         el.textContent = ""
+      }
 
-}
+   }
 
-erro(nome,"Informe seu nome","erro-nome")
-erro(email,"Informe seu email","erro-email")
-erro(curso,"Informe seu curso","erro-curso")
-erro(matricula,"Informe matrícula","erro-matricula")
+   erro(nome, "Informe seu nome", "erro-nome")
+   erro(email, "Informe seu email", "erro-email")
+   erro(curso, "Informe seu curso", "erro-curso")
+   erro(matricula, "Informe matrícula", "erro-matricula")
 
-if(!valido) return
-
-
-const inscricao = {
-nome:nome.value,
-email:email.value,
-curso:curso.value,
-matricula:matricula.value,
-evento:modalTitulo.textContent
-}
-
-let inscritos = JSON.parse(localStorage.getItem("inscricoes")) || []
-
-inscritos.push(inscricao)
-
-localStorage.setItem("inscricoes",JSON.stringify(inscritos))
+   if (!valido) return
 
 
-document.getElementById("modal-form-view").classList.add("hidden")
-document.getElementById("modal-sucesso-view").classList.remove("hidden")
+   const inscricao = {
+      nome: nome.value,
+      email: email.value,
+      curso: curso.value,
+      matricula: matricula.value,
+      evento: modalTitulo.textContent
+   }
 
-document.getElementById("sucesso-mensagem").textContent =
-`Sua vaga no evento "${inscricao.evento}" foi confirmada.`
+   try {
+      const resposta = await fetch("http://localhost:3000/", {
+         method: "POST", 
+         headers: {
+            "Content-Type": "application/json" 
+         },
+         body: JSON.stringify(inscricao)
+      });
 
+      if (!resposta.ok) {
+         throw new Error("Falha ao comunicar com o servidor.");
+      }
+
+      document.getElementById("modal-form-view").classList.add("hidden");
+      document.getElementById("modal-sucesso-view").classList.remove("hidden");
+
+      document.getElementById("sucesso-mensagem").textContent =
+         `Sua vaga no evento "${inscricao.evento}" foi confirmada.`;
+
+   } catch (erro) {
+      console.error("Erro na inscrição:", erro);
+      alert("Ops! Não foi possível concluir a inscrição no momento. Tente novamente mais tarde.");
+   }
 })
 
 
@@ -272,14 +282,14 @@ document.getElementById("sucesso-mensagem").textContent =
    FECHAR TELA DE SUCESSO
 ================================*/
 
-document.getElementById("btn-fechar-sucesso").onclick=()=>{
+document.getElementById("btn-fechar-sucesso").onclick = () => {
 
-overlay.classList.add("hidden")
+   overlay.classList.add("hidden")
 
-document.getElementById("modal-form-view").classList.remove("hidden")
-document.getElementById("modal-sucesso-view").classList.add("hidden")
+   document.getElementById("modal-form-view").classList.remove("hidden")
+   document.getElementById("modal-sucesso-view").classList.add("hidden")
 
-form.reset()
+   form.reset()
 
 }
 
