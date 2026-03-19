@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="daigramEventosUEPA.erd">
+	<entities>
+		<data-source id="postgres-jdbc-19d07a9458d-59d7e646730d5a7a">
+			<entity id="1" name="tb_destaques" fq-name="public.tb_destaques" order="0" font="Segoe UI:9:0" x="40" y="180">
+				<path name="public"/>
+				<path name="eventosuepa"/>
+			</entity>
+			<entity id="2" name="tb_endereco" fq-name="public.tb_endereco" order="1" font="Segoe UI:9:0" x="720" y="220">
+				<path name="public"/>
+				<path name="eventosuepa"/>
+			</entity>
+			<entity id="3" name="tb_evento" fq-name="public.tb_evento" order="2" font="Segoe UI:9:0" x="280" y="240">
+				<path name="public"/>
+				<path name="eventosuepa"/>
+			</entity>
+			<entity id="4" name="tb_inscrito" fq-name="public.tb_inscrito" order="3" border-width="3" font="Segoe UI:9:0" x="500" y="20">
+				<path name="public"/>
+				<path name="eventosuepa"/>
+			</entity>
+		</data-source>
+	</entities>
+	<relations>
+		<relation name="fk_endereco" fq-name="public.tb_evento.fk_endereco" type="fk" pk-ref="2" fk-ref="3"/>
+		<relation name="fk_inscrito_endereco" fq-name="public.tb_inscrito.fk_inscrito_endereco" type="fk" pk-ref="2" fk-ref="4"/>
+		<relation name="fk_evento_destaque" fq-name="public.tb_destaques.fk_evento_destaque" type="fk" pk-ref="3" fk-ref="1"/>
+		<relation name="fk_inscrito" fq-name="public.tb_evento.fk_inscrito" type="fk" pk-ref="4" fk-ref="3"/>
+	</relations>
+</diagram>

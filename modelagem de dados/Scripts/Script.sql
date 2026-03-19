@@ -38,3 +38,30 @@ CREATE TABLE IF NOT EXISTS tb_evento (
     CONSTRAINT fk_endereco FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco),
     CONSTRAINT fk_inscrito FOREIGN KEY (id_inscrito) REFERENCES tb_inscrito(id_inscrito)
 );
+
+
+--Alterações
+-- coluna de data à tabela de eventos
+ALTER TABLE tb_evento 
+ADD COLUMN data_evento DATE NOT NULL DEFAULT CURRENT_DATE;
+
+--endereço na tabela de inscritos
+ALTER TABLE tb_inscrito 
+ADD COLUMN id_endereco INT;
+
+ALTER TABLE tb_inscrito 
+ADD CONSTRAINT fk_inscrito_endereco 
+FOREIGN KEY (id_endereco) REFERENCES tb_endereco(id_endereco);
+
+-- destaques para os 6 eventos mais recentes
+-- Esta tabela funciona como uma "view" física ou snapshot
+CREATE TABLE IF NOT EXISTS tb_destaques (
+    id_destaque SERIAL PRIMARY KEY,
+    id_evento INT NOT NULL,
+    
+    CONSTRAINT fk_evento_destaque FOREIGN KEY (id_evento) REFERENCES tb_evento(id_evento)
+);
+
+-- Para inserir os 6 eventos mais recentes nesta tabela:
+-- INSERT INTO tb_destaques (id_evento)
+-- SELECT id_evento FROM tb_evento ORDER BY data_evento DESC LIMIT 6;
